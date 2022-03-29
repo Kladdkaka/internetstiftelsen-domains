@@ -1,6 +1,3 @@
-import dns.name
-
-
 fname = 'se.zone.txt'
 
 names = set()
@@ -9,17 +6,18 @@ with open(fname, 'r') as f:
     for line in f:
         line = line.partition(';')[0].strip()
 
-        #print(repr(line))
-
         if len(line) == 0:
             continue
 
         domain, *_ = line.split()
+        domain = domain[:-1] # remove trailing dot
 
-        #print(domain)#_
+        domain = domain.split('.')
 
-        name = str(dns.name.from_text(domain) - dns.name.from_text('se.'))
-
+        if len(domain) == 1: # top level, ignore
+            continue
+        
+        name = domain[-2]
         names.add(name)
 
 with open('se.names.txt', 'w') as f:
