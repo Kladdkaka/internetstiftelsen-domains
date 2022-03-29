@@ -11,6 +11,8 @@ with open(fname, 'r') as f:
 
 f = open('data/result.txt', 'w')
 
+all_names = []
+
 for count in range(MIN_COUNT, MAX_COUNT + 1):
     combos = list(map(''.join, product(ascii_lowercase, repeat=count)))
 
@@ -27,4 +29,9 @@ for count in range(MIN_COUNT, MAX_COUNT + 1):
     f.write(f'Combos with {count} letters:\n')
     f.write(', '.join(available) + '\n')
 
+    all_names.extend(available)
+
 f.close()
+
+with open('data/names.txt', 'w') as f:
+    f.write('\n'.join(all_names))
