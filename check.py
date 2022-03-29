@@ -27,4 +27,4 @@ for count in range(MIN_COUNT, MAX_COUNT + 1):
     f.write(f'Combos with {count} letters:\n')
     f.write(', '.join(available) + '\n')
 
-
+f.close()
